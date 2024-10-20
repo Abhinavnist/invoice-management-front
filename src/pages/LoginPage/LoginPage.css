@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.login-page {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100vh;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.login-page aside {
+  margin-top: 0;
+}
+.login-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("../../assets/images/login-bg.png") no-repeat center center;
+  background-size: cover;
+  /* opacity: 0.41; */
+  z-index: -1;
+}
+
+.quotes {
+  width: 90%;
+  max-width: 800px;
+  font-family: "Poetsen One", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.15em;
+  color: #0e044a;
+  margin-top: 5rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .login-page {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .quotes {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .login-page::before {
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 480px) {
+  .quotes {
+    font-size: 1rem;
+    margin: 1rem 0 3rem;
+  }
+
+  .login-page {
+    padding: 10px;
+  }
+}

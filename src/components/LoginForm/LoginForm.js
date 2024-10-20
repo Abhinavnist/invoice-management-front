@@ -27,7 +27,7 @@ const LoginForm = ({ showForgetPasswordForm }) => {
 
       // Make login API request
       const response = await axios.post(
-        "https://invoice-management-backend-git-main-abhinavnists-projects.vercel.app/api/auth/login",
+        "https://invoice-management-backend.vercel.app/api/auth/login",
         {
           email: username,
           password,

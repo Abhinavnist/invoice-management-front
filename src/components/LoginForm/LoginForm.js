@@ -1,22 +1,19 @@
 import React, { useState } from "react"
-// import { useLoginMutation } from "../../features/auth/authApiSlice"
-// import { useDispatch } from "react-redux"
-// import { setCredentials } from "./../../features/auth/authSlice"
 import { TextField, Button, Box } from "@mui/material"
 import logo from "./../../assets/images/astha-brand-logo.png"
 import "./LoginForm.css"
 import apple from "./../../assets/images/apple-fill.svg"
 import playstore from "./../../assets/images/google-play-icon.png"
 import heart from "./../../assets/images/heart-pulse-fill.svg"
-// import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
 // import { errorToast, successToast } from "../../utils/toastConfig"
 
 const LoginForm = ({ showForgetPasswordForm }) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  // const [login, { isLoading }] = useLoginMutation()
-  // const dispatch = useDispatch()
-  // const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -24,23 +21,41 @@ const LoginForm = ({ showForgetPasswordForm }) => {
       alert("Please provide both email and password")
       return
     }
+
     try {
-      // const userData = await login({ email: username, password }).unwrap()
-      // console.log(userData)
-      // dispatch(setCredentials(userData))
-      // // Save token and role information in localStorage
-      // localStorage.setItem("token", userData.token)
-      // localStorage.setItem("roleId", userData.user.roleId) // Save the role ID
-      // // Navigate based on user role
-      // const roleId = userData.user.roleId
-      // // Use setTimeout to navigate after a short delay
-      // setTimeout(() => {
-      //   navigate("/home")
-      // }, 1000) // Adjust the delay as necessary
-      // successToast("login successfull")
+      setIsLoading(true)
+
+      // Make login API request
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          email: username,
+          password,
+        }
+      )
+
+      console.log("Login Response:", response.data) // Log the response to inspect the data
+
+      const { token, email } = response.data
+
+      if (!token || !email) {
+        alert("Invalid credentials or unexpected response data")
+        return
+      }
+
+      // Store token and role information in localStorage
+      localStorage.setItem("token", token)
+
+      // Navigate to home page after successful login
+      alert("Login successful")
+      setTimeout(() => {
+        navigate("/home")
+      }, 1000)
     } catch (err) {
       console.error("Failed to login", err)
-      // errorToast("Failed to login", err)
+      alert("Failed to login")
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -50,7 +65,6 @@ const LoginForm = ({ showForgetPasswordForm }) => {
         <form onSubmit={handleSubmit}>
           <TextField
             className="textarea"
-            // label="Username"
             placeholder="Username"
             variant="outlined"
             fullWidth
@@ -60,7 +74,6 @@ const LoginForm = ({ showForgetPasswordForm }) => {
           />
           <TextField
             className="textarea"
-            // label="Password"
             placeholder="Password"
             type="password"
             fullWidth
@@ -72,11 +85,11 @@ const LoginForm = ({ showForgetPasswordForm }) => {
             variant="contained"
             color="primary"
             type="submit"
-            //disabled={isLoading}
+            disabled={isLoading}
             fullWidth
             className="login-button"
           >
-            Login
+            {isLoading ? "Logging in..." : "Login"}
           </Button>
           <p
             className="forgot-password"

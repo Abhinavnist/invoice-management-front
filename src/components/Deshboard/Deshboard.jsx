@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom"; // Import Link for navigation
+import { Link, Navigate, Outlet, useNavigate } from "react-router-dom"; // Import Link for navigation
 import Logo from "../../assets/images/logo.png";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CameraIcon from "@mui/icons-material/Camera";
 import Resdeshboard from "./Resdeshboard";
-
+import LogoutIcon from "@mui/icons-material/Logout";
 const Deshboard = () => {
   const [active, setActive] = useState("/invoicedetails");
+  const navigate = useNavigate();
 
   const sidebarMenu = [
     {
       text: "Dashboard",
       icon: <ContentCopyIcon />,
-      url: "/deshboard/invoicedetails",
+      url: "/invoicedetails",
     },
     { text: "Sanity list", icon: <CameraIcon />, url: "/" },
   ];
@@ -37,10 +38,14 @@ const Deshboard = () => {
     return () => clearInterval(intervalId);
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <>
-      <div className="hidden md:flex h-svh"
-      >
+      <div className="hidden md:flex h-svh">
         <div className="w-[200px] bg-[#2d718f] text-white flex flex-col justify-between">
           <div className="mt-8">
             <h1 className="text-center">
@@ -62,6 +67,13 @@ const Deshboard = () => {
               ))}
             </ul>
           </div>
+            <button
+              className="mx-5 p-1 bg-[#3490b7] hover:bg-[#578da5] rounded-lg cursor-pointer block mt-auto mb-[40px] text-lg"
+              onClick={handleLogout}
+            >
+              <LogoutIcon className="mr-3" />
+              Logout
+            </button>
         </div>
 
         <div className="flex-1 flex flex-col mt-10">

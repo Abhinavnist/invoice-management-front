@@ -1,11 +1,14 @@
 import React, { useState } from "react"
 import { TextField, Button, Box } from "@mui/material"
-import logo from "./../../assets/images/astha-brand-logo.png"
+import logo from "../../assets/images/logo.png"
 import "./LoginForm.css" // Reusing the same styles as LoginForm
+import {useNavigate} from "react-router-dom"
 
-const ChangePasswordForm = ({ showLoginForm }) => {
+const ChangePasswordForm = () => {
   const [newPassword, setNewPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const navigate = useNavigate()
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -17,7 +20,9 @@ const ChangePasswordForm = ({ showLoginForm }) => {
       alert("Passwords do not match!")
     }
   }
-
+  const showLoginForm=()=>{
+    navigate("/login")
+  }
   return (
     <Box className="login-container">
       <Box className="login-form">

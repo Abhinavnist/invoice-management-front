@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet, useNavigate } from "react-router-dom"; // Import Link for navigation
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CameraIcon from "@mui/icons-material/Camera";
+import LogoutIcon from "@mui/icons-material/Logout";
+
 import {
   MenuRounded as MenuIcon,
   CloseRounded as CloseIcon,
@@ -15,6 +17,8 @@ export default function Resdeshboard() {
 
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef(null);
+  const navigate = useNavigate();
+
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
@@ -37,7 +41,7 @@ export default function Resdeshboard() {
     {
         text: "Dashboard",
         icon: <ContentCopyIcon />,
-        url: "/deshboard/invoicedetails",
+        url: "/invoicedetails",
       },
       { text: "Sanity list", icon: <CameraIcon />, url: "/" },
   ];
@@ -62,6 +66,10 @@ export default function Resdeshboard() {
     return () => clearInterval(intervalId);
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
   return (
     <>
       <div className={`bg-gray-300 flex flex-col h-screen overflow-hidden `}>
@@ -125,6 +133,13 @@ export default function Resdeshboard() {
                   ))}
                 </ul>
               </div>
+              <button
+              className="mx-5 p-1 bg-[#3490b7] hover:bg-[#578da5] rounded-lg cursor-pointer block mt-auto mb-[40px] text-lg"
+              onClick={handleLogout}
+            >
+              <LogoutIcon className="mr-3" />
+              Logout
+            </button>
             </div>
           </div>
 

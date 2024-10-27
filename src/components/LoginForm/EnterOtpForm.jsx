@@ -1,14 +1,20 @@
 import React, { useState } from "react"
 import { TextField, Button, Box } from "@mui/material"
-import logo from "./../../assets/images/astha-brand-logo.png"
-import "./LoginForm.css" // Reusing the same styles as LoginForm
+import logo from "../../assets/images/logo.png"
+import "./LoginForm.css"
+import {useNavigate} from "react-router-dom"
+ // Reusing the same styles as LoginForm
 
 const EnterOtpForm = ({ showLoginForm }) => {
   const [otp, setOtp] = useState("")
+  const navigate = useNavigate()
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
     // Handle OTP verification logic here
+    navigate("/changepassword")
+
   }
 
   return (

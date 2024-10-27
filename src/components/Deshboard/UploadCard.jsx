@@ -41,11 +41,18 @@ const UploadCard = ({ setShowupload }) => {
 
   return (
     <>
-      <div className="bg-gray-200 flex justify-center items-center flex-col fixed h-[300px] w-[600px] p-4 rounded-xl shadow-xl ">
-        <div className="flex pl-2 mb-[70px] text-xl">
-          <p className="">Upload a file</p>
+<div
+  className="bg-gray-200 flex justify-center items-center flex-col fixed w-200px sm:h-[300px] sm:w-[600px] p-4 rounded-xl shadow-xl "
+  style={{
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  }}
+>
+        <div className="sm:flex pl-2 mb-[30px] sm:mb-[70px]  sm:text-xl">
+          <p className=" mb-[5px]">Upload a file</p>
           <input
-            className="w-[280px] ml-1 "
+            className="w-[220px] sm:w-[280px] ml-1 "
             type="file"
             onChange={handleFileChange}
             accept="application/pdf"

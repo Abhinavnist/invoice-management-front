@@ -58,6 +58,9 @@ const LoginForm = ({ showForgetPasswordForm }) => {
       setIsLoading(false)
     }
   }
+  const handleforgate=()=>{
+    navigate("/forgotpassword")
+  }
 
   return (
     <Box className="login-container">
@@ -92,8 +95,8 @@ const LoginForm = ({ showForgetPasswordForm }) => {
             {isLoading ? "Logging in..." : "Login"}
           </Button>
           <p
-            className="forgot-password"
-            onClick={showForgetPasswordForm}
+            className="forgot-password cursor-pointer"
+            onClick={handleforgate}
           >
             Forgot Password?
           </p>
@@ -117,7 +120,15 @@ const LoginForm = ({ showForgetPasswordForm }) => {
             </section>
           </div>
           <div className="footer">
-            <p>Copyright © 2024 </p>
+            <p>
+              Made with{" "}
+              <img
+                src={heart}
+                alt=""
+              />{" "}
+              in India
+            </p>
+            <p>Copyright © 2024 Aastha</p>
           </div>
         </form>
       </Box>

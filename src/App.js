@@ -1,9 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import HomePage from "./pages/HomePage/HomePage"; 
+import HomePage from "./pages/HomePage/HomePage";
 import Deshboard from "./components/Deshboard/Deshboard";
 import Invoicedetails from "./components/Deshboard/Invoicedetails";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import ChangePasswordForm from "./components/LoginForm/ChangePasswordForm";
+import EnterOtpForm from "./components/LoginForm/EnterOtpForm";
+import ForgetPasswordForm from "./components/LoginForm/ForgetPasswordForm ";
+import LoginForm from "./components/LoginForm/LoginForm";
 import "./App.css";
 
 function App() {
@@ -11,10 +15,13 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          {/* Define your routes */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/home" element={<HomePage />} />
-          
+          <Route path="/" element={<LoginPage />}>
+            <Route path="login" element={<LoginForm />} />
+            <Route path="changepassword" element={<ChangePasswordForm />} />
+            <Route path="forgotpassword" element={<ForgetPasswordForm />} />
+            <Route path="enterotp" element={<EnterOtpForm />} />
+          </Route>
+
           <Route path="/" element={<Deshboard />}>
             <Route path="invoicedetails" element={<Invoicedetails />} />
           </Route>

@@ -117,15 +117,15 @@ const LoginForm = ({ showForgetPasswordForm }) => {
             </section>
           </div>
           <div className="footer">
-            <p>
+            {/* <p>
               Made with{" "}
               <img
                 src={heart}
                 alt=""
               />{" "}
               in India
-            </p>
-            <p>Copyright © 2024 Aastha</p>
+            </p> */}
+            <p>Copyright © 2024 </p>
           </div>
         </form>
       </Box>

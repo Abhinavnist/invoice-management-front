@@ -16,14 +16,19 @@ const EnterOtpForm = ({ showLoginForm }) => {
     navigate("/changepassword")
 
   }
+  const login=()=>{
+    navigate("/login")
+
+  }
 
   return (
     <Box className="login-container">
       <Box className="login-form">
         <div className="logo">
           <img
+          className="w-[200px]"
             src={logo}
-            alt="astha-logo"
+            alt="logo"
           />
         </div>
         <form onSubmit={handleSubmit}>
@@ -47,7 +52,7 @@ const EnterOtpForm = ({ showLoginForm }) => {
           </Button>
           <Button
             className="back-to-login"
-            onClick={showLoginForm}
+            onClick={login}
           >
             Back to Login
           </Button>

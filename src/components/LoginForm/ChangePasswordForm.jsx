@@ -28,8 +28,9 @@ const ChangePasswordForm = () => {
       <Box className="login-form">
         <div className="logo">
           <img
+          className="w-[200px]"
             src={logo}
-            alt="astha-logo"
+            alt="logo"
           />
         </div>
         <form onSubmit={handleSubmit}>

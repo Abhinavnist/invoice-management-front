@@ -22,6 +22,7 @@ const ForgetPasswordForm = () => {
       <Box className="login-form">
         <div className="logo">
           <img
+          className="w-[200px]"
             src={Logo}
             alt="logo"
           />

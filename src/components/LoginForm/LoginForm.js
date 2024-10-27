@@ -49,7 +49,7 @@ const LoginForm = ({ showForgetPasswordForm }) => {
       // Navigate to home page after successful login
       alert("Login successful")
       setTimeout(() => {
-        navigate("/home")
+        navigate("/invoicedetails")
       }, 1000)
     } catch (err) {
       console.error("Failed to login", err)

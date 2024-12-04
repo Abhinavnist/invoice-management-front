@@ -10,16 +10,18 @@ const UploadCard = ({ setShowupload, setInvoiceData, setShowData }) => {
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
 
-    if (selectedFile && selectedFile.type.startsWith("image/")) {
+    if (
+      selectedFile &&
+      (selectedFile.type.startsWith("image/") || selectedFile.type === "application/pdf")
+    ) {
       setFile(selectedFile);
     } else {
-      alert("Please select a valid image file!");
+      alert("Please select a valid image or PDF file!");
       setFile(null);
     }
   };
 
-
-// img to pdf convertor
+  // Convert image to PDF
   const convertImageToPDF = async (imageFile) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -41,9 +43,6 @@ const UploadCard = ({ setShowupload, setInvoiceData, setShowData }) => {
     });
   };
 
-
-
-
   const handleUpload = async (e) => {
     e.preventDefault();
     if (!file) {
@@ -52,13 +51,21 @@ const UploadCard = ({ setShowupload, setInvoiceData, setShowData }) => {
       return;
     }
 
-    setLoading(true); 
+    setLoading(true);
 
     try {
-      const pdfBlob = await convertImageToPDF(file);
+      let fileToUpload;
+
+      if (file.type.startsWith("image/")) {
+        fileToUpload = await convertImageToPDF(file);
+      } else if (file.type === "application/pdf") {
+        fileToUpload = file; 
+      } else {
+        throw new Error("Unsupported file format");
+      }
 
       const formData = new FormData();
-      formData.append("file", pdfBlob, "converted.pdf");
+      formData.append("file", fileToUpload, file.type.startsWith("image/") ? "converted.pdf" : file.name);
 
       const res = await axios.post(
         "http://34.47.195.164:8080/parse-pdf",
@@ -72,15 +79,11 @@ const UploadCard = ({ setShowupload, setInvoiceData, setShowData }) => {
 
       console.log(res.data);
 
-      const invoiceData = res.data?.data;
-
-      setInvoiceData(invoiceData);
+      
       setShowupload(false);
-      setShowData(true);
     } catch (error) {
       console.error("Error uploading file:", error);
-    } finally {
-      setLoading(false);
+
     }
   };
 
@@ -112,12 +115,12 @@ const UploadCard = ({ setShowupload, setInvoiceData, setShowData }) => {
           }}
         >
           <div className="sm:flex pl-2 mb-[30px] sm:mb-[70px] sm:text-xl">
-            <p className="mb-[5px]">Upload an image file</p>
+            <p className="mb-[5px]">Upload an image or PDF file</p>
             <input
               className="w-[220px] sm:w-[280px] ml-1"
               type="file"
               onChange={handleFileChange}
-              accept="image/*"
+              accept="image/*, application/pdf"
             />
           </div>
           <div className="flex justify-center items-center gap-[90px]">

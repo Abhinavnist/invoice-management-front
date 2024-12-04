@@ -8,6 +8,7 @@ import ChangePasswordForm from "./components/LoginForm/ChangePasswordForm";
 import EnterOtpForm from "./components/LoginForm/EnterOtpForm";
 import ForgetPasswordForm from "./components/LoginForm/ForgetPasswordForm ";
 import LoginForm from "./components/LoginForm/LoginForm";
+import SenityPassed from "./components/Deshboard/SenityPassed";
 import "./App.css";
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
 
           <Route path="/" element={<Deshboard />}>
             <Route path="invoicedetails" element={<Invoicedetails />} />
+            <Route path="senityPassed" element={<SenityPassed />} />
+
           </Route>
         </Routes>
       </div>

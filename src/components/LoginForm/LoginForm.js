@@ -103,14 +103,14 @@ const LoginForm = ({ showForgetPasswordForm }) => {
           <div className="download-links">
             <p>Available On</p>
             <section>
-              <span>
+              <span className="flex flex-col items-center justify-center">
                 <img
                   src={playstore}
                   alt=""
                 />
                 <a href="https://play.google.com/"> Play Store</a>{" "}
               </span>
-              <span>
+              <span className="flex flex-col items-center justify-center">
                 <img
                   src={apple}
                   alt=""
@@ -120,7 +120,7 @@ const LoginForm = ({ showForgetPasswordForm }) => {
             </section>
           </div>
           <div className="footer">
-            <p>
+            <p className="flex items-center justify-center">
               Made with{" "}
               <img
                 src={heart}

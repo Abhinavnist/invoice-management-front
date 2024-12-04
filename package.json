@@ -2,6 +2,7 @@
   "name": "invoice-tracking-system",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://34.47.195.164:8080",
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
@@ -16,6 +17,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
     "invoice-tracking-system": "file:",
+    "jspdf": "^2.5.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",

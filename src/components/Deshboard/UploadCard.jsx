@@ -1,12 +1,48 @@
 import React, { useState } from "react";
 import axios from "axios";
+import jsPDF from "jspdf";
+import loadingGif from "../../assets/images/ld.gif";
 
-const UploadCard = ({ setShowupload }) => {
+const UploadCard = ({ setShowupload, setInvoiceData, setShowData }) => {
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile && selectedFile.type.startsWith("image/")) {
+      setFile(selectedFile);
+    } else {
+      alert("Please select a valid image file!");
+      setFile(null);
+    }
   };
+
+
+// img to pdf convertor
+  const convertImageToPDF = async (imageFile) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+          const pdf = new jsPDF();
+          const width = pdf.internal.pageSize.getWidth();
+          const height = pdf.internal.pageSize.getHeight();
+          pdf.addImage(img, "JPEG", 0, 0, width, height);
+          const pdfBlob = pdf.output("blob");
+          resolve(pdfBlob);
+        };
+        img.onerror = reject;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(imageFile);
+    });
+  };
+
+
+
 
   const handleUpload = async (e) => {
     e.preventDefault();
@@ -16,12 +52,16 @@ const UploadCard = ({ setShowupload }) => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("invoice", file);
+    setLoading(true); 
 
     try {
+      const pdfBlob = await convertImageToPDF(file);
+
+      const formData = new FormData();
+      formData.append("file", pdfBlob, "converted.pdf");
+
       const res = await axios.post(
-        "https://invoice-management-backend.vercel.app/upload-invoice",
+        "http://34.47.195.164:8080/parse-pdf",
         formData,
         {
           headers: {
@@ -29,41 +69,74 @@ const UploadCard = ({ setShowupload }) => {
           },
         }
       );
-      alert(res.data.status)
-      console.log(res.data)
-      console.log(res.data.status)
+
+      console.log(res.data);
+
+      const invoiceData = res.data?.data;
+
+      setInvoiceData(invoiceData);
       setShowupload(false);
-      console.log("File uploaded successfully:", res.data);
+      setShowData(true);
     } catch (error) {
       console.error("Error uploading file:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <>
-<div
-  className="bg-gray-200 flex justify-center items-center flex-col fixed w-200px sm:h-[300px] sm:w-[600px] p-4 rounded-xl shadow-xl "
-  style={{
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-  }}
->
-        <div className="sm:flex pl-2 mb-[30px] sm:mb-[70px]  sm:text-xl">
-          <p className=" mb-[5px]">Upload a file</p>
-          <input
-            className="w-[220px] sm:w-[280px] ml-1 "
-            type="file"
-            onChange={handleFileChange}
-            accept="application/pdf"
+    <div>
+      {loading ? (
+        <div
+          className="flex justify-center items-center flex-col fixed w-200px sm:h-[300px] sm:w-[600px] p-4"
+          style={{
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <img
+            src={loadingGif}
+            alt="Loading..."
+            className="w-[100px] h-[100px] mb-4"
           />
+          <p className="text-black">Uploading file...</p>
         </div>
-        <div className="flex justify-center items-center gap-[90px]">
-          <button className="px-4 py-[3px] text-white bg-green-400 rounded-md " onClick={handleUpload}>Upload</button>
-          <button className="px-5 py-[3px] text-white bg-red-400 rounded-md " onClick={() => setShowupload(false)}>Cancel</button>
+      ) : (
+        <div
+          className="bg-gray-200 flex justify-center items-center flex-col fixed w-200px sm:h-[300px] sm:w-[600px] p-4 rounded-xl shadow-xl"
+          style={{
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <div className="sm:flex pl-2 mb-[30px] sm:mb-[70px] sm:text-xl">
+            <p className="mb-[5px]">Upload an image file</p>
+            <input
+              className="w-[220px] sm:w-[280px] ml-1"
+              type="file"
+              onChange={handleFileChange}
+              accept="image/*"
+            />
+          </div>
+          <div className="flex justify-center items-center gap-[90px]">
+            <button
+              className="px-4 py-[3px] text-white bg-green-400 rounded-md"
+              onClick={handleUpload}
+            >
+              Upload
+            </button>
+            <button
+              className="px-5 py-[3px] text-white bg-red-400 rounded-md"
+              onClick={() => setShowupload(false)}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
-      </div>
-    </>
+      )}
+    </div>
   );
 };
 

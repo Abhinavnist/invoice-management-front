@@ -1,16 +1,16 @@
 import React, { useState } from "react"
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom"; // Import Link for navigation
 
-import LoginForm from "../../components/LoginForm/LoginForm"
-import ForgetPasswordForm from "../../components/LoginForm/ForgetPasswordForm "
-import EnterOtpForm from "../../components/LoginForm/EnterOtpForm"
-import ChangePasswordForm from "../../components/LoginForm/ChangePasswordForm"
+// import LoginForm from "../../components/LoginForm/LoginForm"
+// import ForgetPasswordForm from "../../components/LoginForm/ForgetPasswordForm "
+// import EnterOtpForm from "../../components/LoginForm/EnterOtpForm"
+// import ChangePasswordForm from "../../components/LoginForm/ChangePasswordForm"
 import "./LoginPage.css"
 
 const LoginPage = () => {
-  const [formType, setFormType] = useState("login") // Can be 'login', 'forget', 'otp', or 'changePassword'
+  // const [formType, setFormType] = useState("login") // Can be 'login', 'forget', 'otp', or 'changePassword'
 
-  const renderForm = () => {
+  // const renderForm = () => {
     // switch (formType) {
     //   case "login":
     //     return (
@@ -30,7 +30,7 @@ const LoginPage = () => {
     //   default:
     //     return <LoginForm />
     // }
-  }
+  // }
 
   return (
     // <div className="login-page">

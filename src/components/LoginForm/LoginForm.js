@@ -120,7 +120,7 @@ const LoginForm = ({ showForgetPasswordForm }) => {
             </section>
           </div>
           <div className="footer">
-            <p className="flex items-center justify-center">
+            <p>
               Made with{" "}
               <img
                 src={heart}

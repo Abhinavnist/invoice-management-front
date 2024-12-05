@@ -52,7 +52,7 @@ const UploadCard = ({ setShowupload, setInvoiceData, setShowData }) => {
     }
 
     setLoading(true);
-
+  
     try {
       let fileToUpload;
 
@@ -66,9 +66,9 @@ const UploadCard = ({ setShowupload, setInvoiceData, setShowData }) => {
 
       const formData = new FormData();
       formData.append("file", fileToUpload, file.type.startsWith("image/") ? "converted.pdf" : file.name);
-
+  
       const res = await axios.post(
-        "http://34.47.195.164:8080/parse-pdf",
+        "http://34.47.195.164:8080/check-sanity",
         formData,
         {
           headers: {
@@ -76,16 +76,20 @@ const UploadCard = ({ setShowupload, setInvoiceData, setShowData }) => {
           },
         }
       );
-
+  
       console.log(res.data);
-
-      
+      alert(res.data.message)
+      setLoading(false);
       setShowupload(false);
     } catch (error) {
       console.error("Error uploading file:", error);
+      alert("File upload failed.");
+
+      setLoading(false);
 
     }
   };
+
 
   return (
     <div>

@@ -19,7 +19,7 @@ const Deshboard = () => {
       icon: <ContentCopyIcon />,
       url: "/invoicedetails",
     },
-    { text: "Sanity list", icon: <CameraIcon /> },
+    { text: "Sanity - 2 ", icon: <CameraIcon />, url: "/sanityVari" },
   ];
 
   const handleClick = (url) => {

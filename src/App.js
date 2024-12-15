@@ -10,6 +10,8 @@ import ForgetPasswordForm from "./components/LoginForm/ForgetPasswordForm ";
 import LoginForm from "./components/LoginForm/LoginForm";
 import SenityPassed from "./components/Deshboard/SenityPassed";
 import SenityFailed from "./components/Deshboard/SenityFailed";
+import Sanity2Vari from "./components/Deshboard/Sanity2Vari";
+import SanityLevels2List from "./components/Deshboard/SanityLevels2List";
 import "./App.css";
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<LoginPage />}>
+          <Route index element={<LoginForm />} />
+
             <Route path="login" element={<LoginForm />} />
             <Route path="changepassword" element={<ChangePasswordForm />} />
             <Route path="forgotpassword" element={<ForgetPasswordForm />} />
@@ -25,9 +29,13 @@ function App() {
           </Route>
 
           <Route path="/" element={<Deshboard />}>
+            {/* <Route index element={<Invoicedetails />} /> */}
             <Route path="invoicedetails" element={<Invoicedetails />} />
             <Route path="senityPassed" element={<SenityPassed />} />
             <Route path="senityFailed" element={<SenityFailed />} />
+            <Route path="sanityVari" element={<Sanity2Vari />} />
+            <Route path="SanityLevels2List" element={<SanityLevels2List />} />
+
 
 
           </Route>

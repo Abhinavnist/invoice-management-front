@@ -98,7 +98,7 @@ const SenityFailed = ({ handleInfo }) => {
         />
       </Stack>
       <button
-        className="h-[30px] w-[70px] text-white  bg-[#6BC6B0] fixed right-20 bottom-20"
+        className="h-[30px] w-[70px] text-white  bg-[#6BC6B0] right-20 bottom-20"
         onClick={backtohome}
       >
         Back

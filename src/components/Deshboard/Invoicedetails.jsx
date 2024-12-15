@@ -16,8 +16,8 @@ const Invoicedetails = () => {
     const fetchSanityData = async () => {
       try {
         const res = await axios.get("http://34.47.195.164:8080/getSanity");
-        const passLength = res.data.data.length; // Correctly access nested data array
-        console.log("Sanity Passed:", passLength);
+        const passLength = res.data.data.length; 
+        // console.log("Sanity Passed:", passLength);
         setPassS(passLength);
       } catch (error) {
         console.error("Error fetching passed sanity data:", error);
@@ -27,8 +27,8 @@ const Invoicedetails = () => {
     const fetchSanityFailed = async () => {
       try {
         const res = await axios.get("http://34.47.195.164:8080/getFailed-sanity");
-        const failLength = res.data.data.length; // Correctly access nested data array
-        console.log("Sanity Failed:", failLength);
+        const failLength = res.data.data.length; 
+        // console.log("Sanity Failed:", failLength);
         setFailedS(failLength);
       } catch (error) {
         console.error("Error fetching failed sanity data:", error);
@@ -66,7 +66,7 @@ const Invoicedetails = () => {
             </div>
 
             <div className="flex items-center justify-center w-64 h-36 p-4 bg-[#6d797b] rounded-xl text-white font-medium text-lg relative cursor-pointer"
-            onClick={failedList}
+            // onClick={failedList}
             >
               <div>Failed Invoice</div>
               <div className="absolute bottom-0 right-0 p-5">{failedS}</div>

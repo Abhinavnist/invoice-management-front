@@ -43,8 +43,8 @@ export default function Resdeshboard() {
         icon: <ContentCopyIcon />,
         url: "/invoicedetails",
       },
-      { text: "Sanity list", icon: <CameraIcon />, url: "/" },
-  ];
+      { text: "Sanity - 2 ", icon: <CameraIcon />, url: "/sanityVari" },
+    ];
   const [active, setActive] = useState("/invoicedetails");
   const handleClick = (url) => {
     setActive(url);

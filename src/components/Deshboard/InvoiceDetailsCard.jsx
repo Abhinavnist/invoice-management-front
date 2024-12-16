@@ -4,7 +4,6 @@ const InvoiceDetailsCard = ({ invoiceData, setShowData }) => {
     setShowData(false);
   };
 
-  // Return null or a loading state if invoiceData is undefined or null
   if (!invoiceData) {
     return <div>Loading...</div>;
   }

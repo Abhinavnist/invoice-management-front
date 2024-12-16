@@ -38,10 +38,7 @@ const SanityLevels2List = () => {
   return (
     <>
       <div
-        className={`
-                    ${showData ? " blur-sm " : ""} 
-
-        `}
+        
       >
         <h1 className="text-[#454545] font-semibold text-lg font-display underline decoration-1 mb-4 w-min text-nowrap">
           Sanity Levels -2 List

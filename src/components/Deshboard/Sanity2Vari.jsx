@@ -105,7 +105,7 @@ const Sanity2Vari = () => {
                           {row.amount || "N/A"}
                         </td>
                         <td className="border p-2 text-center">
-                          {new Date(row.dop).toLocaleDateString() || "N/A"}
+                          {row.dop || "N/A"}
                         </td>
                         <td className="border p-2 text-center">
                           Passed

@@ -10,8 +10,10 @@ const Sanity2Check = ({ setShowSanity2Check, invoiceData }) => {
 
   useEffect(() => {
     const fetchSanityData = async () => {
+
+      const encodedInvoiceNumber = encodeURIComponent(invoiceData);
       try {
-        const res = await axios.get(`http://34.47.195.164:8080/api/compare-sanity/${invoiceData}`);
+        const res = await axios.get(`http://34.47.195.164:8080/api/compare-sanity/${encodedInvoiceNumber}`);
         setSanityResult(res.data);
       } catch (error) {
         console.error('Error fetching sanity data:', error);
